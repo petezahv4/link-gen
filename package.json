@@ -1,0 +1,12 @@
+{
+  "name": "fullstack-project",
+  "version": "1.0.0",
+  "description": "Frontend + Backend for Firebase subdomain generator",
+  "scripts": {
+    "start": "echo 'Use the frontend or backend separately'",
+    "frontend": "cd frontend && npm start",
+    "backend": "cd backend && npm start"
+  },
+  "author": "PeteZah",
+  "license": "ISC"
+}
