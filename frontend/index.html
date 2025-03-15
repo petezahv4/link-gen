@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subdomain Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+      margin: 0;
+    }
+
+    .container {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 300px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 24px;
+      color: #333;
+    }
+
+    input[type="text"] {
+      width: 80%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 85%;
+      padding: 10px;
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .error {
+      color: #e74c3c;
+    }
+
+    .success {
+      color: #2ecc71;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Generate Firebase Subdomain</h1>
+  <input type="text" id="subdomain" placeholder="Enter your subdomain">
+  <button id="generateLinkBtn">Generate Link</button>
+  
+  <div class="result" id="result"></div>
+</div>
+
+<script>
+  document.getElementById('generateLinkBtn').addEventListener('click', function() {
+    const subdomain = document.getElementById('subdomain').value.trim();
+    const resultElement = document.getElementById('result');
+
+    if (!subdomain) {
+      resultElement.textContent = 'Please enter a subdomain.';
+      resultElement.className = 'result error';
+      return;
+    }
+
+    // Reset the result message
+    resultElement.textContent = '';
+    resultElement.className = 'result';
+
+    // Make the POST request to the backend
+    fetch('https://your-codespace-url/generate-link', {  // Replace this with your actual backend URL
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ subdomain: subdomain })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.error) {
+        resultElement.textContent = data.error;
+        resultElement.className = 'result error';
+      } else {
+        resultElement.textContent = `Deployment successful! Visit: ${data.url}`;
+        resultElement.className = 'result success';
+      }
+    })
+    .catch(error => {
+      resultElement.textContent = 'Error connecting to the server.';
+      resultElement.className = 'result error';
+      console.error(error);
+    });
+  });
+</script>
+
+</body>
+</html>
