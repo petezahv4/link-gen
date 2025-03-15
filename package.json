@@ -1,0 +1,21 @@
+{
+  "name": "firebase-link-generator",
+  "version": "1.0.0",
+  "description": "A Firebase link generator that deploys a GitHub repository to a custom subdomain.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "deploy": "firebase deploy"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "body-parser": "^1.19.0",
+    "firebase-tools": "^11.0.0"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": "14.x"
+  },
+  "author": "",
+  "license": "ISC"
+}
